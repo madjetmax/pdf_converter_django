@@ -28,12 +28,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["192.168.88.161"]
 ALLOWED_HOSTS = []
 
-# ALLOWED_HOSTS = ["f22bc0ff886f.ngrok-free.app"]
-# CSRF_TRUSTED_ORIGINS = ['https://f22bc0ff886f.ngrok-free.app']
-CSRF_TRUSTED_ORIGINS = ["http://192.168.88.161"]
+# CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -175,9 +172,9 @@ LOCALE_PATHS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 
-CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
 CELERY_RESULT_EXPIRES = 3600
 
