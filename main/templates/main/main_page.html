@@ -1,0 +1,195 @@
+{% load crispy_forms_tags %}  
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{{page_data.description}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{page_data.title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="{% static 'main/css/main_page_style.css' %}">
+</head>
+<body>
+    {% if not user.is_authenticated %}
+        <div class="header-btns">
+            <a href="{% url 'users_login' %}" class="btn login-btn">Prijava</a>
+            <a href="{% url 'users_register' %}" class="btn signup-btn">Registracija</a>
+        </div>
+    {% else %}
+        <div class="header-btns">
+            <a href="{% url 'users_profile' %}" class="btn profile-btn">Profil</a>
+        </div>
+    {% endif %}
+    <div class="main-wrap">
+        <h1 class="main-title">
+            {{page_data.h1}}
+        </h1>
+        <!-- container with form -->
+        <div class="container">
+            <!-- error box -->
+            {% if submit_error %}
+                <div id="error_box" class="error-box">{{form.file.errors.0}}</div>
+            {% else %}
+                <div id="error_box" class="error-box"></div>
+            {% endif %}
+            <!-- main form -->
+            <form method="POST" class="main-form" id="main_form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.file}} 
+                <label for="id_file" id="file_label" class="custom-file-upload">
+                    Izberite datoteke ali spustite tukaj
+                </label>
+                <!-- divider -->
+                <div style="width: 20px; height: 20px;"></div>
+                <button class="blue-btn submit-btn hidden" id="file_send_button" type="submit">Pretvori</button>
+            </form>
+            <small class="loaded-file" id="loaded_file"></small>
+
+            <!-- dowload button -->
+            <div class="download-btn-wrapp">
+                <button class="blue-btn download-btn hidden" id="download_btn" onclick="downloadFile()">
+                    Prenesi
+                </button>
+            </div>
+        </div>
+        <!--* other info  -->
+        <div class="other-info">
+            <div class="point main-title">
+                Pretvori PDF v Word – Hitro, Enostavno in Brezplačno
+            </div>
+            <div class="point title">
+                📄 Brezplačna spletna pretvorba PDF v Word
+            </div>
+            <div class="point text">
+                Iščete zanesljivo orodje za pretvorbo PDF v Word? Naša spletna storitev vam omogoča hitro in varno pretvorbo PDF dokumentov v Word format (.docx) – brezplačno, brez registracije in brez omejitev.
+            </div>
+            <div class="point title">
+                ⚡ Enostavna uporaba
+            </div>
+            <div class="point list">
+                <div class="point-child">1. Naložite svojo PDF datoteko</div>
+                <div class="point-clild">2. Kliknite »Pretvori v Word«</div>
+                <div class="point-clid">3. Prenesite datoteko Word (.docx) v nekaj sekundah</div>
+            </div>
+            <div class="point text">
+                Ni potrebna nobena namestitev ali programska oprema – vse poteka v vašem brskalniku.
+            </div>
+            <div class="point title">
+                Zakaj izbrati naše orodje za pretvorbo PDF v Word?
+            </div>
+            <div class="point list">
+                <div class="point-clild">✅ Popolnoma brezplačno</div>
+                <div class="point-clild">✅ Podpira vse jezike in pisave</div>
+                <div class="point-clild">✅ Visoka kakovost pretvorbe – ohranjena postavitev, slike, tabele in besedilo</div>
+                <div class="point-clild">✅ Varno in zaupno – vaše datoteke se samodejno izbrišejo po pretvorbi</div>
+                <div class="point-clild">✅ Dela na vseh napravah – računalnik, tablica ali telefon</div>
+            </div>
+            <div class="point title">
+                Idealno za študente, podjetnike in vsakodnevne uporabnike
+            </div>
+            <div class="point text">
+                Ne glede na to, ali pripravljate seminarsko nalogo, poslovno poročilo ali želite zgolj urediti obstoječ PDF dokument – naš PDF v Word pretvornik vam pomaga prihraniti čas in trud.
+            </div>
+            <div class="point title">
+                Hitro. Varno. Natančno.
+            </div>
+            <div class="point text">
+                🔒 Vaša zasebnost je naša prioriteta. Vaših dokumentov ne shranjujemo in jih nikoli ne delimo z drugimi. Vse datoteke se samodejno izbrišejo po 60 minutah.
+            </div>
+            <div class="point title">
+                Pretvori PDF v Word zdaj!
+            </div>
+            <div class="point text">
+                📥 Kliknite spodaj in naložite svojo PDF datoteko. V manj kot minuti jo boste imeli pripravljeno v Word dokumentu.
+            </div>
+            <div class="point title">
+                Najpogostejša vprašanja (FAQ)
+            </div>
+            <div class="point quest-answer">
+                <div class="question">
+                    Kako dolgo traja pretvorba?
+                </div>
+                <div class="answer">
+                    Običajno le nekaj sekund, odvisno od velikosti datoteke.
+                </div>
+            </div>
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali moram kaj namestiti?
+                </div>
+                <div class="answer">
+                    Ne, vse poteka v brskalniku. Ne potrebujete nobene dodatne programske opreme.
+                </div>
+            </div>
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali je brezplačno?
+                </div>
+                <div class="answer">
+                    Da, popolnoma brezplačno za uporabo brez omejitev.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="links">
+            <a href="{% url 'questions_page' %}">Vprašanja (FAQ)</a>
+            <a href="{% url 'blog_page' %}">Blog</a>
+        </div>
+    </div>
+
+    <!-- layers separator -->
+    {% if wait_for_task_done or file_convertion_error %}    
+        <div class="layers-separator" id="layers_separator"></div>
+    {% else %}
+        <div class="layers-separator hidden" id="layers_separator"></div>
+    {% endif %}
+    <!-- windows, ads that are in front -->
+
+    <!-- ad -->
+    {% if wait_for_task_done %}
+    <div class="ad-wrapper" id="ad_wrapper">
+        <!-- creating ad image and link -->
+        <a href="{{ad_model.url}}" target="_blank">
+            {% if ad_model.image %}
+                <img src="{{ad_model.image.url}}">
+            {% else %}
+                <img src="{{ad_model.image_url}}">
+            {% endif %}
+        </a>
+        
+        <button class="close-btn" id="close_btn" onclick="closeAd()">
+            <div class="close hidden" id="close_ad_text">
+                ZAPRTO
+            </div>
+            <div class="progress-title" id="progress_title">
+                Pretvarjanje<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+            </div>
+        </button>
+    </div>
+    {% endif %}
+
+    <!-- send user register -->
+    {% if file_convertion_error %}
+    <div class="user-register-to-load-more-wrap">
+        <div>Za pretvorbo več datotek se <a href="{% url 'users_register' %}">Registrirajte</a></div>
+    </div>
+    {% endif %}
+
+    <div class="user-register-to-load-scaned-wrap hidden" id="register_to_download_box">
+        <div>Za pretvorbo skeniranih datotek <a href="{% url 'users_register' %}">Registrirajte</a></div>
+    </div>
+
+    <script
+        id="main-script"
+        data-wait-for-task-done="{{ wait_for_task_done }}"
+        data-task-id="{{ task_id }}"
+        data-task-access-token="{{ task_access_token }}"
+        src="{% static 'main/js/main_page_script.js' %}">
+    </script>
+</body>
+</html>

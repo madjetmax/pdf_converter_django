@@ -1,0 +1,134 @@
+:root {
+    --blue-btn-color: #4e91fc;
+    --blue-btn-hovered-color: #2f6fe0;
+    --dark-blue-btn-color: #3768b7;
+    --light-gray-text-color: rgb(197, 204, 211);
+    --image-shadow-color: rgba(0, 0, 0, 0.329);
+    --close-btn-background-color: rgb(217, 217, 217);
+    --close-btn-text-color: rgb(83, 88, 93);
+    --dark-gray-text-color: rgb(47, 47, 47);
+    --user-login-text-color: rgb(115, 115, 115);
+    --user-login-url-text-color: rgb(65, 92, 143);
+    --link-text-color: #3768b7;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: aliceblue;
+}
+
+.navigation-btns {
+    z-index: 100;
+    width: max-content;
+
+    position: fixed;
+    top: 10px;
+    left: 10px;
+
+    font-size: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn {
+        border: none;
+        height: fit-content;
+        min-width: fit-content;
+        font-size: 20px;
+
+        padding: 7px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 300ms ease-in;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+        background-color: white;
+        color: var(--dark-gray-text-color);
+    }   
+
+    .btn:hover {
+        background-color: var(--light-gray-text-color);
+    }
+
+    .main-page-btn {
+        margin-right: 10px;
+    }
+}
+
+.main-wrap {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.questions-wrap {
+    width: fit-content;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    .point {
+        max-width: 1000px;
+        margin: 10px 0;
+        color: var(--dark-gray-text-color);
+    }
+
+    .main-title {
+        position: relative;
+        left: 50%;
+        translate: -50%;
+        font-size: 40px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .quest-answer {
+        margin-left: 50px;
+        .question {
+            font-size: 28px;
+            font-weight: 500;
+            text-align: left;
+        }
+        .answer {
+            font-size: 25px;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .questions-wrap  {
+        .point.main-title {
+            margin-left: 0px;
+            font-size: 30px;
+            font-weight: 700;
+            text-align: left;
+        }
+        .point.title {
+            margin-left: 0px;
+        }
+        .point.text {
+            margin-left: 0px;
+            text-align: justify;
+        }
+        .point.list {
+            margin-left: 0px;
+        }
+        .point.quest-answer {
+            margin-left: 0px;
+            text-align: justify;
+        }
+    }
+}

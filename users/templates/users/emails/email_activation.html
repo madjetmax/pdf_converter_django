@@ -1,0 +1,5 @@
+Živjo, {{user.get_full_name}}
+
+Tukaj je povezava za aktivacijo računa:
+
+{{protocol}}://{{domain}}{% url 'users_email_activation' uidb64=uid token=token %}

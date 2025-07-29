@@ -1,0 +1,10 @@
+Django==4.2.13
+django-crispy-forms==2.3
+crispy-bootstrap4
+celery[redis]
+pdf2docx
+gunicorn
+python-dotenv
+psycopg2-binary
+Pillow
+gevent

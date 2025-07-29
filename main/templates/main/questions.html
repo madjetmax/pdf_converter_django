@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{{page_data.description}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_data.title}}</title>
+
+    <link rel="stylesheet" href="{% static 'main/css/questions_style.css' %}">
+</head>
+<body>
+    <div class="navigation-btns">
+        <a href="{% url 'main_page' %}" class="btn main-page-btn">Glavna stran</a>
+        <a href="{% url 'blog_page' %}" class="btn blog-page-btn">Blog</a>
+    </div>
+    <div class="main-wrap">
+        <div class="questions-wrap">
+            <h1 class="point main-title">
+                <!-- Pogosta vprašanja (FAQ) -->
+                {{page_data.h1}}
+            </h1>
+            <!-- questions - answers -->
+            <div class="point quest-answer">
+                <div class="question">
+                    Kako pretvorim PDF v Word?
+                </div>
+                <div class="answer">
+                    Preprosto! Naložite PDF datoteko na našo spletno stran, kliknite gumb »Pretvori«, in v nekaj sekundah bo na voljo Word (.docx) datoteka za prenos.
+                </div>
+            </div>
+
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali je pretvorba PDF v Word brezplačna?
+                </div>
+                <div class="answer">
+                    Da, storitev je popolnoma brezplačna. Ni vam treba ustvariti računa ali vnašati osebnih podatkov.
+                </div>
+            </div>
+
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali moram kaj namestiti za pretvorbo?
+                </div>
+                <div class="answer">
+                    Ne. Naš spletni PDF v Word pretvornik deluje neposredno v vašem brskalniku – brez prenosov ali namestitev.
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali bo postavitev dokumenta ostala enaka?
+                </div>
+                <div class="answer">
+                    Da. Naša tehnologija ohranja izvirno postavitev, slike, tabele, pisave in oblikovanje iz vašega PDF dokumenta v Word formatu.
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Kako dolgo traja pretvorba PDF v Word?
+                </div>
+                <div class="answer">
+                    Običajno traja le nekaj sekund, odvisno od velikosti vaše datoteke in hitrosti vaše internetne povezave.
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Katere naprave podpirate?
+                </div>
+                <div class="answer">
+                    Naša spletna stran deluje na vseh napravah: računalnikih (Windows, Mac), tablicah in pametnih telefonih (Android, iOS).
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Kako varne so moje datoteke?
+                </div>
+                <div class="answer">
+                    Vaša zasebnost nam je zelo pomembna. Vse datoteke se samodejno izbrišejo iz naših strežnikov v 60 minutah po pretvorbi. Nihče drug nima dostopa do njih.
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Katere formate pretvorite?
+                </div>
+                <div class="answer">
+                    Trenutno podpiramo pretvorbo iz PDF v Word (.docx). V prihodnosti bomo dodali tudi druge možnosti, kot so PDF v Excel, PDF v PowerPoint ipd.
+                </div>
+            </div>
+            
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali lahko pretvorim skenirani PDF?
+                </div>
+                <div class="answer">
+                    Da, naš pretvornik uporablja OCR (optično prepoznavanje znakov) za skenirane dokumente, čeprav je rezultat lahko odvisen od kakovosti izvirne datoteke.
+                </div>
+            </div>
+
+            <div class="point quest-answer">
+                <div class="question">
+                    Ali obstaja omejitev velikosti datoteke?
+                </div>
+                <div class="answer">
+                    Običajno podpiramo datoteke do 20 MB. Če imate večjo datoteko, jo poskusite razdeliti ali zmanjšati njeno velikost pred nalaganjem.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

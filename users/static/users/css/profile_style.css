@@ -1,0 +1,77 @@
+:root {
+    --blue-btn-color: #4e91fc;
+    --dark-blue-btn-color: #3768b7;
+    --light-gray-text-color: rgb(197, 204, 211);
+    --image-shadow-color: rgba(0, 0, 0, 0.329);
+    --close-btn-background-color: rgb(217, 217, 217);
+    --close-btn-text-color: rgb(83, 88, 93);
+    --red-border-color: rgb(255, 98, 98);
+    --red-text-color: rgb(255, 83, 83);
+}
+
+body {
+    background-color: aliceblue;
+    /* background: linear-gradient(210deg,rgba(82, 206, 255, 1) 0%, rgba(99, 175, 184, 1) 50%, rgba(230, 230, 230, 1) 100%); */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+}
+
+.header-btns {
+    z-index: 100;
+    width: max-content;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    font-size: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn {
+        border: none;
+        height: fit-content;
+        min-width: fit-content;
+        font-size: 20px;
+
+        padding: 7px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 300ms ease-in;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }   
+
+    .change-password {
+        margin-right: 10px;
+        background-color: var(--blue-btn-color);
+        color: white;
+        
+    }
+
+    .change-password:hover {
+        background-color: var(--dark-blue-btn-color);
+    }
+
+    .logout {
+        margin-right: 10px;
+        background-color: white;
+        color: var(--dark-gray-text-color);
+    }
+
+    .logout:hover {
+        background-color: var(--light-gray-text-color);
+    }
+}

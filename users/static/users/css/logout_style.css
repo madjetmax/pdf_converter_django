@@ -1,0 +1,63 @@
+
+:root {
+    --blue-btn-color: #4e91fc;
+    --dark-blue-btn-color: #3768b7;
+    --light-gray-text-color: rgb(197, 204, 211);
+    --image-shadow-color: rgba(0, 0, 0, 0.329);
+    --close-btn-background-color: rgb(217, 217, 217);
+    --close-btn-text-color: rgb(83, 88, 93);
+    --red-border-color: rgb(255, 98, 98);
+    --red-text-color: rgb(255, 83, 83);
+}
+
+body {
+    background-color: aliceblue;
+    /* background: linear-gradient(210deg,rgba(82, 206, 255, 1) 0%, rgba(99, 175, 184, 1) 50%, rgba(230, 230, 230, 1) 100%); */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-form {
+    width: 500px;
+    max-width: 80%;
+    padding: 40px;
+    background: linear-gradient(200deg,rgb(157, 217, 241) 0%, rgb(203, 237, 244) 70%);
+
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    /* .form-group {
+        width: 100%;
+        margin-bottom: 10px;
+    } */
+}
+
+.blue-btn {
+    margin-top: 10px;
+    width: 100%;
+
+    padding: 5px 40px;
+
+    border-radius: 2px;
+    border: none;
+
+    background-color: var(--blue-btn-color);
+    color: aliceblue;
+
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.blue-btn:hover {
+    background-color: #2f6fe0;
+}

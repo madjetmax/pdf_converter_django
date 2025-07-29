@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+.env
+.env.*
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Backup files
+*~
+*.bak
+
+# Testing
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Docker
+*.pid
+
+# Migrations (optional: include only if you auto-generate them often)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+**/migrations/*.py
+
+# Celery
+celerybeat-schedule

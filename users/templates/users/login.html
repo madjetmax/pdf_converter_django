@@ -1,0 +1,38 @@
+{% load crispy_forms_tags %}  
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{{page_data.description}}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="{% static 'users/css/login_style.css' %}">
+    
+    <title>{{page_data.title}}</title>
+</head>
+<body>
+    <form class="main-form" method="POST">
+        <h1 class="main-title">{{page_data.h1}}</h1>
+
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="password-visibility">
+            <input type="checkbox" id="toggle_visibility" onclick="toggloPasswordVisibility(this)">
+            <label for="toggle_visibility">Prikaži geslo</label>
+        </div>
+
+        <div class="signup-btn">
+            Nimate računa?<a href="{% url 'users_register' %}">Registracija</a>
+        </div>
+        <button class="blue-btn submit-button" type="submit">Prijava</button>
+    </form>
+
+    <script
+        id="main-script"
+        src="{% static 'users/js/login_script.js' %}">
+    </script>
+</body>
+</html>
