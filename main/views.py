@@ -42,7 +42,7 @@ def get_new_file_name(request):
     now = datetime.datetime.now()
     formated_now = now.strftime("%d-%b-%Y_%H-%M-%S")
 
-    name = f"{formated_now}_{str(request.user).replace(" ", "-").replace(".", "-")}_{str(uuid4())[:12]}"
+    name = f"{formated_now}_{str(request.user).replace(' ', '-').replace('.', '-')}_{str(uuid4())[:12]}"
     return name
 
 def save_pdf_file(request: HttpRequest) -> str:
