@@ -15,6 +15,7 @@ staticfiles/
 .env
 .env.*
 setting.py
+loaded_pdf_files/
 
 # Virtual environment
 venv/
