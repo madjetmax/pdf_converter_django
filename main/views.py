@@ -10,7 +10,6 @@ from .models import Advertisement, PageData, BlogParagraph, TaskAccessToken
 from . import tasks 
 from celery.result import AsyncResult
 from celery import current_app
-
 # other
 import datetime
 from uuid import uuid4

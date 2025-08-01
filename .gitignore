@@ -14,6 +14,7 @@ media/
 staticfiles/
 .env
 .env.*
+setting.py
 
 # Virtual environment
 venv/
