@@ -206,26 +206,6 @@
     </div>
     {% endif %}
 
-    <div class="ad-wrapper" id="ad_wrapper">
-        <!-- creating ad image and link -->
-        <a href="{{ad_model.url}}" target="_blank">
-            {% if ad_model.image %}
-                <img src="{{ad_model.image.url}}">
-            {% else %}
-                <img src="{{ad_model.image_url}}">
-            {% endif %}
-        </a>
-        
-        <button class="close-btn" id="close_btn" onclick="closeAd()">
-            <div class="close hidden" id="close_ad_text">
-                ZAPRTO
-            </div>
-            <div class="progress-title" id="progress_title">
-                Pretvarjanje<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-            </div>
-        </button>
-    </div>
-
     <!-- send user register -->
     {% if file_convertion_error %}
     <div class="user-register-to-load-more-wrap">

@@ -74,13 +74,10 @@ def main_page(request: HttpRequest):
 
     if request.method == "GET":
         form = FileUploadForm()
-        rand_ad = Advertisement.objects.order_by("?").first()
 
         context = {
             "form": form,
             "page_data": page_data,
-            "ad_model": rand_ad,
-
         }
         return render(request, 'main/main_page.html', context)
     
