@@ -15,6 +15,7 @@ import datetime
 from uuid import uuid4
 import tempfile
 import os
+from copy import deepcopy
 
 def get_page_data(request: HttpRequest) -> PageData | None:
     url_name = request.resolver_match.view_name
@@ -73,9 +74,13 @@ def main_page(request: HttpRequest):
 
     if request.method == "GET":
         form = FileUploadForm()
+        rand_ad = Advertisement.objects.order_by("?").first()
+
         context = {
             "form": form,
-            "page_data": page_data
+            "page_data": page_data,
+            "ad_model": rand_ad,
+
         }
         return render(request, 'main/main_page.html', context)
     
@@ -151,8 +156,15 @@ def get_task_status(request: HttpRequest, task_id, task_access_token):
         # send if task is done
         elif task.state == 'SUCCESS':
             # check if file is scanned and user need to register
-            _, _, need_to_register, _ = task.result
+            pdf_path, docx_path, need_to_register, _ = task.result
             if need_to_register:
+                # delete temp files
+                try:
+                    os.remove(docx_path)
+                    if settings.DELETE_PDF_FILES:
+                        os.remove(pdf_path)
+                except:
+                    pass
                 return JsonResponse({'status': 'register_to_download'})
             
             return JsonResponse({'status': 'success'})
@@ -173,10 +185,17 @@ def download_file(request: HttpRequest, task_id, task_access_token):
         
         # send file
         # get pdf and docx path
-        pdf_path, docx_path, need_to_register, remove_files_task_id = task.result  
+        pdf_path, docx_path, need_to_register, remove_files_task_id = task.result
         if need_to_register:
             return JsonResponse({"message": "register to download scanned file!"})
         
+        # delete task access token
+        task_access_token.delete()
+
+        # remove files_delete celry task
+        remove_files_task = AsyncResult(remove_files_task_id)
+        remove_files_task.revoke(terminate=True)
+
         # read docx file and set it in response
         with open(docx_path, 'rb') as docx_file:
             file_data = docx_file.read()
@@ -184,13 +203,6 @@ def download_file(request: HttpRequest, task_id, task_access_token):
 
             response['Content-Disposition'] = f'attachment; filename=converted.docx'
             response['Content-Length'] = len(file_data)  # calculate length of content
-        
-        # delete task access token
-        task_access_token.delete()
-
-        # remove files delete celry task
-        remove_files_task = AsyncResult(remove_files_task_id)
-        remove_files_task.revoke(terminate=True)
 
         # delete temp files
         try:
@@ -200,7 +212,7 @@ def download_file(request: HttpRequest, task_id, task_access_token):
         except:
             pass
         
-        # return download content
+        # return content to download
         return response
 
 # other 

@@ -285,12 +285,8 @@ function showLayersSeparator() {
     layers_separator.classList.remove("hidden");
 }
 
-//* scroll page down to show more info
+// * fix ad image size
 
-function showMoreInfo() {
-    // window.scrollBy(0, window.innerHeight); 
-    window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth',
-    });
-}
+window.addEventListener("resize", function() {
+    fixAdImageSize();
+})
