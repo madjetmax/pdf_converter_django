@@ -176,7 +176,7 @@
     </div>
 
     <!-- layers separator -->
-    {% if wait_for_task_done or file_convertion_error %}    
+    {% if file_convertion_error %}    
         <div class="layers-separator" id="layers_separator"></div>
     {% else %}
         <div class="layers-separator hidden" id="layers_separator"></div>
@@ -184,12 +184,20 @@
     <!-- windows, ads that are in front -->
 
     <!-- ad -->
-    {% if wait_for_task_done %}
-    <div class="ad-wrapper" id="ad_wrapper">
+    <div class="ad-wrapper hidden" style="display: none;" id="ad_wrapper">
         <!-- creating ad image and link -->
         <a href="{{ad_model.url}}" target="_blank">
-            {% if ad_model.image %}
-                <img src="{{ad_model.image.url}}">
+            {% if ad_model.content_file %}
+                <!-- show ad as image, video, gif -->
+                {% if ad_model.content_type == "image" %}
+                    <img class="image" src="{{ad_model.content_file.url}}">
+                {% elif ad_model.content_type == "gif" %}
+                    <img class="gif" src="{{ad_model.content_file.url}}">
+                {% elif ad_model.content_type == "video" %}
+                    <video class="video" autoplay muted loop>
+                        <source src="{{ad_model.content_file.url}}">
+                    </video>
+                {% endif %}
             {% else %}
                 <img src="{{ad_model.image_url}}">
             {% endif %}
@@ -204,7 +212,6 @@
             </div>
         </button>
     </div>
-    {% endif %}
 
     <!-- send user register -->
     {% if file_convertion_error %}

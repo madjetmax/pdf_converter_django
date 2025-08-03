@@ -26,7 +26,7 @@ def convert_pdf_to_docx(self, temp_pdf_path, can_convert_scanned_file=False) -> 
     # check if file is scanned (has images)
     if not can_convert_scanned_file:
         if contain_images(temp_pdf_path):
-            return None, None, need_register_to_convert
+            return None, None, need_register_to_convert, None
     
     need_register_to_convert = False
     

@@ -1,6 +1,7 @@
 let script_data = document.querySelector("#main-script");
 
 // file uploads
+const main_form = document.querySelector("#main_form");
 const loaded_file = document.querySelector("#loaded_file");
 const dropArea = document.querySelector("#file_label");
 const fileInput = document.querySelector("#id_file");
@@ -84,6 +85,23 @@ dropArea.addEventListener("drop", e => {
 // sending data and manage ad
 let wait_for_task_done = script_data.dataset.waitForTaskDone;
 
+// check user got on page from back button
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted || performance.getEntriesByType("navigation")[0].type === 'back_forward') {
+        wait_for_task_done = false;
+    } else {
+        if (wait_for_task_done) {
+             // start checking task
+            startTaskCheck();
+
+            // show ad and layers separator
+            showLayersSeparator();
+            showAdWrapper();
+        }
+    }
+});
+
+
 let task_status_check_interval = 2 * 1000; // miliseconds
 let download_taks_id = null;
 
@@ -97,7 +115,7 @@ let loaded_file_blob_data = null;
 const max_dowload_countdown = 5;
 let download_access_countdown = max_dowload_countdown;
 
-if (wait_for_task_done) {
+function startTaskCheck() {
     on_converting = true;
     let task_id = script_data.dataset.taskId;
     let task_access_token = script_data.dataset.taskAccessToken;
@@ -106,8 +124,10 @@ if (wait_for_task_done) {
         () => checkStatus(task_id, task_access_token), 
         1, 
     );
+    console.log("waiting");
+    
 }
-
+// func to seng get requesto for checking task status and errors
 async function checkStatus(task_id, task_access_token) {
     let response = await fetch(`/check-task-status/${task_id}/${task_access_token}`);
     let data = await response.json();
@@ -240,6 +260,7 @@ function hiddeProgressTitle() {
 
 function showAdWrapper() {
     ad_wrapper.classList.remove("hidden");
+    ad_wrapper.style.display = "block";
 }
 function showDownloadButton() {
     download_button.classList.remove("hidden");
@@ -284,9 +305,3 @@ function hideLayersSeparator() {
 function showLayersSeparator() {
     layers_separator.classList.remove("hidden");
 }
-
-// * fix ad image size
-
-window.addEventListener("resize", function() {
-    fixAdImageSize();
-})
