@@ -30,19 +30,20 @@ class UserRegisterForm(UserCreationForm):
         for field in self.fields.values():
             field.help_text = None
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        try:
-            # get and delete user with not active account
-            user = User.objects.get(email=email)
-            if not user.is_active:
-                user.delete()
-                return email
+    # todo to delete not active user
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+    #     try:
+    #         # get and delete user with not active account
+    #         user = User.objects.get(email=email)
+    #         if not user.is_active:
+    #             user.delete()
+    #             return email
             
-            # user exists and acount is active
-            raise forms.ValidationError(_("Email already exists")) 
-        except User.DoesNotExist:            
-            return email
+    #         # user exists and acount is active
+    #         raise forms.ValidationError(_("Email already exists")) 
+    #     except User.DoesNotExist:            
+    #         return email
         
     class Meta:
         model = User
@@ -58,25 +59,27 @@ class UserLoginForm(AuthenticationForm):
     username = forms.EmailField(
         label=_("Email"),
         max_length=100,
+        # to ser custom name and class
         widget=forms.EmailInput(attrs={
-            "name": "email",       # custom HTML name attribute
-            "class": "form-control",  # your desired CSS class
+            "name": "email",       
+            "class": "form-control",  
         })
     )
 
-    # check email
-    def clean_username(self):
-        email = self.cleaned_data["username"]
-        try:
-            user = User.objects.get(email=email)
-            if not user.is_active:
-                self.add_error(
-                    None, forms.ValidationError(_("Activate Your Account to Sign In!")) 
-                )
-                return None
-            return email
-        except User.DoesNotExist:            
-            return email
+    # todo to check if user is active
+    # # check email
+    # def clean_username(self):
+    #     email = self.cleaned_data["username"]
+    #     try:
+    #         user = User.objects.get(email=email)
+    #         if not user.is_active:
+    #             self.add_error(
+    #                 None, forms.ValidationError(_("Activate Your Account to Sign In!")) 
+    #             )
+    #             return None
+    #         return email
+    #     except User.DoesNotExist:            
+    #         return email
         
     class Meta:
         model = User

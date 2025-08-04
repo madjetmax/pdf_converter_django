@@ -38,10 +38,9 @@ def check_can_convert_files(request: HttpRequest):
 # todo test ad image link https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKmswbD-uU1A6C_jRIJ8oiBEavijias6o8uQ&s
 
 # for files saving 
-def get_new_file_name(request):
+def get_new_file_name(request: HttpRequest):
     now = datetime.datetime.now()
     formated_now = now.strftime("%d-%b-%Y_%H-%M-%S")
-
     name = f"{formated_now}_{str(request.user).replace(' ', '-').replace('.', '-')}_{str(uuid4())[:12]}"
     return name
 

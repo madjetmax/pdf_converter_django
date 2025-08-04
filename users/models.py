@@ -43,4 +43,4 @@ class User(AbstractUser, PermissionsMixin):
         return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
         
     def __str__(self):
-        return f"{self.get_full_name()}"
+        return f"{self.get_full_name()}-{self.pk}"

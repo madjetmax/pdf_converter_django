@@ -70,18 +70,24 @@ def register_page(request: HttpRequest):
     if request.method == "POST":
         reg_form = UserRegisterForm(request.POST)
         if reg_form.is_valid():
-            # create user and redirect to login
-            user: User = reg_form.save(commit=False)
-            user.is_active = False
-            user.save()
+            # todo user creation with email verification
+            # # create user and send email verification
+            # user: User = reg_form.save(commit=False)
+            # user.is_active = False
+            # user.save()
 
-            # sending email for validation
-            send_email_validation(request, user, reg_form)
+            # just save form and login user
+            user = reg_form.save()
+            login(request, user)
+
+            # todo # sending email for validation
+            # todo send_email_validation(request, user, reg_form)
 
             # set messages
-            messages.info(request, _("To activate account check your email!"))
+            # todo messages.info(request, _("To activate account check your email!"))
 
-            return redirect("users_register")
+            # todo return redirect("users_register")
+            return redirect("main_page")
         
     # create content and return page
     context = {
@@ -158,6 +164,8 @@ def logout_page(request: HttpRequest):
     }
     return render(request, "users/logout.html", context)
 
+
+# todo for password reset button in template <a href="{% url 'password_reset' %}" class="btn change-password">Spremeni geslo</a>
 # profile and other for user
 @login_required
 def profile_page(request: HttpRequest):

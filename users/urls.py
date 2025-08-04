@@ -25,7 +25,7 @@ from . import views
 
 urlpatterns = [
     path("register/", views.register_page, name="users_register"),
-    path("activate/<str:uidb64>/<str:token>/", views.activate_email, name="users_email_activation"),
+    # todo path("activate/<str:uidb64>/<str:token>/", views.activate_email, name="users_email_activation"),
 
     path("login/",views.login_page, name="users_login"),
     path("logout/",views.logout_page, name="users_logout"),
@@ -33,28 +33,30 @@ urlpatterns = [
     # user profile and other
     path("profile/", views.profile_page, name="users_profile"),
     
-    path("password-reset/", views.reset_password, name="password_reset"),
-    path(
-        "password-reset/done/", 
-        auth_views.PasswordResetDoneView.as_view(
-            template_name="users/password_reset/password_reset_done.html",
-        ), 
-        name="password_reset_done"
-    ),
-    path(
-        "password-reset/confirm/<uidb64>/<token>/", 
-        auth_views.PasswordResetConfirmView.as_view(
-            template_name="users/password_reset/password_reset_confirm.html",
-        ), 
-        name="password_reset_confirm"
-    ),
-    path(
-        "password-reset-complete", 
-        auth_views.PasswordResetCompleteView.as_view(
-            template_name="users/password_reset/password_reset_complete.html",
-        ), 
-        name="password_reset_complete"
-    ),
+    # todo passord reset 
+    # path("password-reset/", views.reset_password, name="password_reset"),
+    # path(
+    #     "password-reset/done/", 
+    #     auth_views.PasswordResetDoneView.as_view(
+    #         template_name="users/password_reset/password_reset_done.html",
+    #     ), 
+    #     name="password_reset_done"
+    # ),
+    # path(
+    #     "password-reset/confirm/<uidb64>/<token>/", 
+    #     auth_views.PasswordResetConfirmView.as_view(
+    #         template_name="users/password_reset/password_reset_confirm.html",
+    #     ), 
+    #     name="password_reset_confirm"
+    # ),
+    # path(
+    #     "password-reset-complete", 
+    #     auth_views.PasswordResetCompleteView.as_view(
+    #         template_name="users/password_reset/password_reset_complete.html",
+    #     ), 
+    #     name="password_reset_complete"
+    # ),
+    # todo passord reset 
 ]
 
 if settings.DEBUG:

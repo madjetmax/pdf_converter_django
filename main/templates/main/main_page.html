@@ -188,14 +188,14 @@
         <!-- creating ad image and link -->
         <a href="{{ad_model.url}}" target="_blank">
             {% if ad_model.content_file %}
-                <!-- show ad as image, video, gif -->
+                <!-- show ad as image, gif, video -->
                 {% if ad_model.content_type == "image" %}
                     <img class="image" src="{{ad_model.content_file.url}}">
                 {% elif ad_model.content_type == "gif" %}
                     <img class="gif" src="{{ad_model.content_file.url}}">
                 {% elif ad_model.content_type == "video" %}
                     <video class="video" autoplay muted loop>
-                        <source src="{{ad_model.content_file.url}}">
+                        <source src="{{ad_model.content_file.url}}" type="video/{{ad_model.video_type}}">
                     </video>
                 {% endif %}
             {% else %}
