@@ -33,6 +33,7 @@ class Advertisement(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
 
+    
 
 class PageData(models.Model):
     url_name = models.CharField(max_length=100, blank=False, null=True)
@@ -46,5 +47,10 @@ class PageData(models.Model):
 
 class BlogParagraph(models.Model):
     text = models.TextField(blank=False)
+    
     show_more_button = models.BooleanField(default=True, blank=False)
     max_text_rows = models.IntegerField(default=3, validators=[MinValueValidator(1)], blank=False)
+
+    def __str__(self):
+        # return first 20 characters
+        return f"{self.text[:20]}... {self.pk}"

@@ -109,12 +109,20 @@ body {
 
         font-size: 25px;
         text-align: justify;
-    }
+        /* for text with indent */
+        p {
+            margin: 0;
+            text-indent: 30px;
+        }
+        /* for text with new line start and margin */
+        div {
+            margin-bottom: 10px;
+        }
+    }   
 
     .text.full {
         display: block;
     }
-    
 
     .show-more-btn {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="{{page_data.description}}">
@@ -56,7 +56,7 @@
             {% for par in paragraphs %}
                 <div class="point">
                     <div class="text" style="-webkit-line-clamp: {{ par.max_text_rows }};">
-                        {{par.text}}
+                        {{par.text|safe}}
                     </div>
                     {% if par.show_more_button %}
                         <button data-full-text="false" class="show-more-btn" onclick="showMoreText(this)">
