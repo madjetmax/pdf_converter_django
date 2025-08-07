@@ -5,7 +5,14 @@ from django.views.decorators.csrf import csrf_protect
 from django.conf import settings
 
 from .forms import FileUploadForm
-from .models import Advertisement, PageData, BlogParagraph, TaskAccessToken, MainPageOtherInfo
+from .models import (
+    Advertisement, 
+    PageData, 
+    TaskAccessToken, 
+    BlogParagraph, 
+    MainPageOtherInfo,
+    QuestionAnswer
+)
 # celery tasks
 from . import tasks 
 from celery.result import AsyncResult
@@ -235,8 +242,13 @@ def download_file(request: HttpRequest, task_id, task_access_token):
 # other 
 def questions_page(request: HttpRequest):
     page_data = get_page_data(request)
+
+    # getting blog paragraphs
+    questions_answers = QuestionAnswer.objects.all()
+
     context = {
-        "page_data": page_data
+        "page_data": page_data,
+        "questions_answers": questions_answers
     }
     return render(request, "main/questions.html", context)
 

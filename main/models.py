@@ -44,6 +44,13 @@ class PageData(models.Model):
     def __str__(self):
         return self.url_name
 
+# for main, blog, questions pages text
+class MainPageOtherInfo(models.Model):
+    text = models.TextField()
+
+    def __str__(self):
+        # return first 30 characters
+        return f"{self.text[:30]}... "
 
 class BlogParagraph(models.Model):
     text = models.TextField(blank=False)
@@ -55,9 +62,10 @@ class BlogParagraph(models.Model):
         # return first 20 characters
         return f"{self.text[:20]}... {self.pk}"
     
-class MainPageOtherInfo(models.Model):
-    text = models.TextField()
+class QuestionAnswer(models.Model):
+    question = models.TextField(blank=False)
+    answer = models.TextField(blank=False)
 
     def __str__(self):
-        # return first 30 characters
-        return f"{self.text[:30]}... "
+        # return first 20 characters
+        return f"{self.question[:20]}... {self.pk}"
