@@ -5,7 +5,7 @@
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="{{page_data.description}}">
+    <meta name="description" content="{{page_data.page_data.description}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Tag Manager --> 
@@ -38,7 +38,7 @@
     } 
     </script>
 
-    <title>{{page_data.title}}</title>
+    <title>{{page_data.page_data.title}}</title>
     <link rel="stylesheet" href="{% static 'main/css/main_page_style.css' %}">
 </head>
 <body>
@@ -58,7 +58,7 @@
     {% endif %}
     <div class="main-wrap">
         <h1 class="main-title">
-            {{page_data.h1}}
+            {{page_data.page_data.h1}}
         </h1>
         <!-- container with form -->
         <div class="container">
@@ -90,81 +90,7 @@
         </div>
         <!--* other info  -->
         <div class="other-info">
-            <div class="point main-title">
-                Pretvori PDF v Word – Hitro, Enostavno in Brezplačno
-            </div>
-            <div class="point title">
-                📄 Brezplačna spletna pretvorba PDF v Word
-            </div>
-            <div class="point text">
-                Iščete zanesljivo orodje za pretvorbo PDF v Word? Naša spletna storitev vam omogoča hitro in varno pretvorbo PDF dokumentov v Word format (.docx) – brezplačno, brez registracije in brez omejitev.
-            </div>
-            <div class="point title">
-                ⚡ Enostavna uporaba
-            </div>
-            <div class="point list">
-                <div class="point-child">1. Naložite svojo PDF datoteko</div>
-                <div class="point-clild">2. Kliknite »Pretvori v Word«</div>
-                <div class="point-clid">3. Prenesite datoteko Word (.docx) v nekaj sekundah</div>
-            </div>
-            <div class="point text">
-                Ni potrebna nobena namestitev ali programska oprema – vse poteka v vašem brskalniku.
-            </div>
-            <div class="point title">
-                Zakaj izbrati naše orodje za pretvorbo PDF v Word?
-            </div>
-            <div class="point list">
-                <div class="point-clild">✅ Popolnoma brezplačno</div>
-                <div class="point-clild">✅ Podpira vse jezike in pisave</div>
-                <div class="point-clild">✅ Visoka kakovost pretvorbe – ohranjena postavitev, slike, tabele in besedilo</div>
-                <div class="point-clild">✅ Varno in zaupno – vaše datoteke se samodejno izbrišejo po pretvorbi</div>
-                <div class="point-clild">✅ Dela na vseh napravah – računalnik, tablica ali telefon</div>
-            </div>
-            <div class="point title">
-                Idealno za študente, podjetnike in vsakodnevne uporabnike
-            </div>
-            <div class="point text">
-                Ne glede na to, ali pripravljate seminarsko nalogo, poslovno poročilo ali želite zgolj urediti obstoječ PDF dokument – naš PDF v Word pretvornik vam pomaga prihraniti čas in trud.
-            </div>
-            <div class="point title">
-                Hitro. Varno. Natančno.
-            </div>
-            <div class="point text">
-                🔒 Vaša zasebnost je naša prioriteta. Vaših dokumentov ne shranjujemo in jih nikoli ne delimo z drugimi. Vse datoteke se samodejno izbrišejo po 60 minutah.
-            </div>
-            <div class="point title">
-                Pretvori PDF v Word zdaj!
-            </div>
-            <div class="point text">
-                📥 Kliknite spodaj in naložite svojo PDF datoteko. V manj kot minuti jo boste imeli pripravljeno v Word dokumentu.
-            </div>
-            <div class="point title">
-                Najpogostejša vprašanja (FAQ)
-            </div>
-            <div class="point quest-answer">
-                <div class="question">
-                    Kako dolgo traja pretvorba?
-                </div>
-                <div class="answer">
-                    Običajno le nekaj sekund, odvisno od velikosti datoteke.
-                </div>
-            </div>
-            <div class="point quest-answer">
-                <div class="question">
-                    Ali moram kaj namestiti?
-                </div>
-                <div class="answer">
-                    Ne, vse poteka v brskalniku. Ne potrebujete nobene dodatne programske opreme.
-                </div>
-            </div>
-            <div class="point quest-answer">
-                <div class="question">
-                    Ali je brezplačno?
-                </div>
-                <div class="answer">
-                    Da, popolnoma brezplačno za uporabo brez omejitev.
-                </div>
-            </div>
+            {{page_data.other_info.text|safe}}
         </div>
     </div>
 

@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.conf import settings
 
 from .forms import FileUploadForm
-from .models import Advertisement, PageData, BlogParagraph, TaskAccessToken
+from .models import Advertisement, PageData, BlogParagraph, TaskAccessToken, MainPageOtherInfo
 # celery tasks
 from . import tasks 
 from celery.result import AsyncResult
@@ -24,6 +24,27 @@ def get_page_data(request: HttpRequest) -> PageData | None:
         return page_data
     except PageData.DoesNotExist:
         return None
+    
+def get_main_page_data(request: HttpRequest):
+    # get page data: title description h1
+    url_name = request.resolver_match.view_name
+    try:
+        page_data = PageData.objects.get(url_name=url_name)
+    except PageData.DoesNotExist:
+        page_data = None
+
+    # get other info
+    try:
+        other_info = MainPageOtherInfo.objects.first()
+    except MainPageOtherInfo.DoesNotExist:
+        other_info = None
+
+    data = {
+        "page_data": page_data,
+        "other_info": other_info
+    }
+
+    return data
 
 def check_can_convert_files(request: HttpRequest):
     converted_files_count = request.session.get("files_convertions", 0)
@@ -69,7 +90,7 @@ def save_pdf_file(request: HttpRequest) -> str:
 
 @csrf_protect
 def main_page(request: HttpRequest):
-    page_data = get_page_data(request)
+    page_data = get_main_page_data(request)
 
     if request.method == "GET":
         form = FileUploadForm()

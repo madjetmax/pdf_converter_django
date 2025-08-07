@@ -54,3 +54,10 @@ class BlogParagraph(models.Model):
     def __str__(self):
         # return first 20 characters
         return f"{self.text[:20]}... {self.pk}"
+    
+class MainPageOtherInfo(models.Model):
+    text = models.TextField()
+
+    def __str__(self):
+        # return first 30 characters
+        return f"{self.text[:30]}... "
