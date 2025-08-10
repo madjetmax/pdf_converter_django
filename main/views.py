@@ -189,8 +189,12 @@ def get_task_status(request: HttpRequest, task_id, task_access_token):
                         os.remove(pdf_path)
                 except:
                     pass
+                # delete access token
+                task_access_token.delete()
+                # return error status
                 return JsonResponse({'status': 'register_to_download'})
             
+            # returns seccess
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'error', 'message': str(task.info)})
