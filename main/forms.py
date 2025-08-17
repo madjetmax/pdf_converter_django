@@ -1,8 +1,7 @@
-from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django import forms
-from .models import Advertisement
+from .models import Advertisement, PageData, BlogParagraph
 from django.utils.translation import gettext_lazy as _
 
 import os
@@ -20,6 +19,16 @@ class FileUploadForm(forms.Form):
         validators=[FileExtensionValidator(["pdf"], message=_("Invalid file extension.\nAllowed extensions are: pdf")), file_size_validator],
         widget=forms.ClearableFileInput(attrs={'accept': '.pdf'}),
     )  
+
+# * for admin
+class PageDataCreationForm(forms.ModelForm):
+    class Meta:
+        model = PageData
+        fields = "__all__"
+
+        widgets = {
+            "url": forms.TextInput(attrs={"class": "vTextField"}),  # render as <input type="text">
+        }
 
 
 class AdvertisementCreationForm(forms.ModelForm):

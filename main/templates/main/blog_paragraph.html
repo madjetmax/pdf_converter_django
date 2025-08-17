@@ -1,4 +1,3 @@
-{% load crispy_forms_tags %}  
 {% load static %}
 
 <!DOCTYPE html>
@@ -40,39 +39,31 @@
     } 
     </script>
 
-    <link rel="stylesheet" href="{% static 'users/css/register_style.css' %}">
     <title>{{page_data.title}}</title>
+    <link rel="stylesheet" href="{% static 'main/css/blog_style.css' %}">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) --> 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53MWT6RS" 
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    {% if messages %}
-        <div class="server-messages">
-            {% for message in messages %}
-                <div{% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</div>
-            {% endfor %}
+    <div class="navigation-btns">
+        <a href="{% url 'main_page' %}" class="btn main-page-btn">Glavna stran</a>
+        <a href="{% url 'blog_page' %}" class="btn questions-page-btn">Nazaj na blog</a>
+    </div>
+    <div class="main-wrap">
+        <div class="blog-wrap">
+            <h1 class="main-title">{{page_data.h1}}</h1> 
+            <!-- blog paragraphs -->
+            <div class="text">
+                {{paragraph.text|safe}}
+            </div>
         </div>
-    {% endif %}
-    <form class="main-form" method="POST">
-        <h1 class="main-title">{{page_data.h1}}</h1>
-        {% csrf_token %}
-        
-        {{form|crispy}}
-        <div class="password-visibility">
-            <input type="checkbox" id="toggle_visibility" onclick="toggloPasswordVisibility(this)">
-            <label for="toggle_visibility">Prikaži geslo</label>
-        </div>
-        <div class="login-btn">
-            Že imate račun?<a href="{% url 'users_login' %}">Prijava</a>
-        </div>
-        <button class="blue-btn submit-button" type="submit">Registracija</button>
-    </form>
+    </div>
 
     <script
         id="main-script"
-        src="{% static 'users/js/register_script.js' %}">
+        src="{% static 'main/js/blog_script.js' %}">
     </script>
 </body>
 </html>

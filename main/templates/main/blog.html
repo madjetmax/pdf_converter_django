@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta name="description" content="{{page_data.description}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    {% for tag in page_data.get_list_additional_metatags %}
+        {{tag|safe}}
+    {% endfor %}
     <!-- Google Tag Manager --> 
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': 
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], 
@@ -52,45 +54,14 @@
     <div class="main-wrap">
         <div class="blog-wrap">
             <h1 class="point main-title">{{page_data.h1}}</h1> 
-            <!-- blog paragraphs -->
+            <!-- blog paragraphs links and titles -->
             {% for par in paragraphs %}
-                <div class="point">
-                    <div class="text" style="-webkit-line-clamp: {{ par.max_text_rows }};">
-                        {{par.text|safe}}
+                <div class="paragraph">
+                    <div  class="title">
+                        <a href="{{par.page_data.url}}">{{par.title}}</a>
                     </div>
-                    {% if par.show_more_button %}
-                        <button data-full-text="false" class="show-more-btn" onclick="showMoreText(this)">
-                            Prikaži več
-                        </button>
-                    {% endif %}                
                 </div>
             {% endfor %}
-
-            <!-- <div class="point">
-                <div class="text" style="-webkit-line-clamp: 2;">
-                    The ship creaked as it sliced through calm waters, chasing the sun. No one aboard knew what lay beyond the blue edge of the world. Maps were forbidden, replaced by riddles and dreams. The captain said the sea was alive, always listening, always judging. That night, the stars blinked out one by one. In the silence, they sailed onward.
-                </div>
-                <button data-full-text="false" class="show-more-btn" onclick="showMoreText(this)">
-                    Prikaži več
-                </button>                
-            </div>
-
-            <div class="point">
-                <div class="text">
-                    The ship creaked as it sliced through calm waters, chasing the sun. No one aboard knew what lay beyond the blue edge of the world. Maps were forbidden, replaced by riddles and dreams. The captain said the sea was alive, always listening, always judging. That night, the stars blinked out one by one. In the silence, they sailed onward.
-                </div>
-                <button data-full-text="false" class="show-more-btn" onclick="showMoreText(this)">
-                    Prikaži več
-                </button>                
-            </div>
-
-            <div class="point">
-                <div class="text">
-                    The ship creaked as it sliced through calm waters, chasing the sun. No one aboard knew what lay beyond the blue edge of the world. Maps were forbidden, replaced by riddles and dreams. The captain said the sea was alive, always listening, always judging. That night, the stars blinked out one by one. In the silence, they sailed onward.
-                </div>
-                <button data-full-text="false" class="show-more-btn" onclick="showMoreText(this)">
-                    Prikaži več
-                </button>                 -->
             </div>
         </div>
     </div>

@@ -7,5 +7,7 @@ urlpatterns = [
     path('download-file/<str:task_id>/<uuid:task_access_token>/', views.download_file, name='download_file'),
     # other
     path('questions/', views.questions_page, name='questions_page'),
+    # * for blog
     path('blog/', views.blog_page, name='blog_page'),
+    path('blog/<str:url>/', views.blog_paragraph, name='blog_paragraph'),
 ]

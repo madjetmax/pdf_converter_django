@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.http.request import HttpRequest
 from django.views.decorators.csrf import csrf_protect
@@ -25,20 +25,16 @@ import os
 from copy import deepcopy
 
 def get_page_data(request: HttpRequest) -> PageData | None:
-    url_name = request.resolver_match.view_name
+    url = request.path
     try:
-        page_data = PageData.objects.get(url_name=url_name)
+        page_data = PageData.objects.get(url=url)
         return page_data
     except PageData.DoesNotExist:
         return None
     
 def get_main_page_data(request: HttpRequest):
     # get page data: title description h1
-    url_name = request.resolver_match.view_name
-    try:
-        page_data = PageData.objects.get(url_name=url_name)
-    except PageData.DoesNotExist:
-        page_data = None
+    page_data = get_page_data(request)
 
     # get other info
     try:
@@ -104,8 +100,9 @@ def main_page(request: HttpRequest):
 
         context = {
             "form": form,
-            "page_data": page_data,
+            **page_data
         }
+        
         return render(request, 'main/main_page.html', context)
     
     if request.method == 'POST':   
@@ -248,7 +245,7 @@ def questions_page(request: HttpRequest):
     page_data = get_page_data(request)
 
     # getting blog paragraphs
-    questions_answers = QuestionAnswer.objects.all()
+    questions_answers = QuestionAnswer.objects.all().order_by("-id")
 
     context = {
         "page_data": page_data,
@@ -256,14 +253,27 @@ def questions_page(request: HttpRequest):
     }
     return render(request, "main/questions.html", context)
 
+
+# * for blog
 def blog_page(request: HttpRequest):
     page_data = get_page_data(request)
     
     # getting blog paragraphs
-    paragraphs = BlogParagraph.objects.all()
+    paragraphs = BlogParagraph.objects.all().order_by("-id")
 
     context = {
         "page_data": page_data,
         "paragraphs": paragraphs
     }
     return render(request, "main/blog.html", context)
+
+def blog_paragraph(request: HttpRequest, url: str):
+    # get paragraph by page data
+    url_name = request.path
+    paragraph = get_object_or_404(BlogParagraph, page_data__url=url_name)
+
+    context = {
+        "paragraph": paragraph,
+        "page_data": paragraph.page_data,
+    }
+    return render(request, "main/blog_paragraph.html", context)

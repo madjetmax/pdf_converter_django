@@ -7,14 +7,23 @@ from .models import (
     MainPageOtherInfo,
     QuestionAnswer
 )
-from .forms import AdvertisementCreationForm
+from .forms import (
+    AdvertisementCreationForm, 
+    PageDataCreationForm,
+)
 
-admin.site.register(PageData)
+# register 
 admin.site.register(TaskAccessToken)
-
-admin.site.register(BlogParagraph)
 admin.site.register(MainPageOtherInfo)
 admin.site.register(QuestionAnswer)
+admin.site.register(BlogParagraph)
+
+# register with classes
+@admin.register(PageData)
+class PageDataAdmin(admin.ModelAdmin):
+    form = PageDataCreationForm
+    list_display = ("url_name", "url")
+    inlines = []
 
 @admin.register(Advertisement)
 class AdvertisementAdmin(admin.ModelAdmin):

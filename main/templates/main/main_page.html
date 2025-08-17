@@ -5,9 +5,11 @@
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="{{page_data.page_data.description}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="{{page_data.description}}">
+    {% for tag in page_data.get_list_additional_metatags %}
+        {{tag|safe}}
+    {% endfor %}
     <!-- Google Tag Manager --> 
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': 
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], 
@@ -38,7 +40,7 @@
     } 
     </script>
 
-    <title>{{page_data.page_data.title}}</title>
+    <title>{{page_data.title}}</title>
     <link rel="stylesheet" href="{% static 'main/css/main_page_style.css' %}">
 </head>
 <body>
@@ -58,7 +60,7 @@
     {% endif %}
     <div class="main-wrap">
         <h1 class="main-title">
-            {{page_data.page_data.h1}}
+            {{page_data.h1}}
         </h1>
         <!-- container with form -->
         <div class="container">
@@ -90,7 +92,7 @@
         </div>
         <!--* other info  -->
         <div class="other-info">
-            {{page_data.other_info.text|safe}}
+            {{other_info.text|safe}}
         </div>
     </div>
 

@@ -8,7 +8,6 @@ class TaskAccessToken(models.Model):
     task_id = models.CharField(max_length=255, unique=True)
     access_token = models.UUIDField(default=uuid4, unique=True)    
 
-
 def create_unique_image_path(instanse, filename: str):
     directory = "ads_images"
     extention = ".".join(filename.split(".")[1:])
@@ -33,14 +32,22 @@ class Advertisement(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
 
-    
-
 class PageData(models.Model):
-    url_name = models.CharField(max_length=100, blank=False, null=True)
+    url_name = models.CharField(max_length=100, blank=False, null=True, unique=True)
+    url = models.TextField(unique=True) # endpoint like /example/path/
+
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(max_length=150, blank=False)
-    h1 = models.CharField(max_length=100, blank=False)
+    # like a list of tags separated with \n
+    additional_meta_tags = models.TextField(null=True, blank=True)
 
+    h1 = models.CharField(max_length=100, blank=False)
+    def get_list_additional_metatags(self) -> list[str]:
+        if self.additional_meta_tags:
+            return self.additional_meta_tags.split("\n")
+
+        return []
+    
     def __str__(self):
         return self.url_name
 
@@ -53,14 +60,13 @@ class MainPageOtherInfo(models.Model):
         return f"{self.text[:30]}... "
 
 class BlogParagraph(models.Model):
+    page_data = models.ForeignKey(PageData, on_delete=models.CASCADE)
+
+    title = models.CharField(max_length=255, null=True)
     text = models.TextField(blank=False)
     
-    show_more_button = models.BooleanField(default=True, blank=False)
-    max_text_rows = models.IntegerField(default=3, validators=[MinValueValidator(1)], blank=False)
-
     def __str__(self):
-        # return first 20 characters
-        return f"{self.text[:20]}... {self.pk}"
+        return self.title
     
 class QuestionAnswer(models.Model):
     question = models.TextField(blank=False)
