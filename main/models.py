@@ -66,7 +66,7 @@ class BlogParagraph(models.Model):
     text = models.TextField(blank=False)
     
     def __str__(self):
-        return self.title
+        return str(self.title)
     
 class QuestionAnswer(models.Model):
     question = models.TextField(blank=False)
