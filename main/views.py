@@ -119,7 +119,7 @@ def main_page(request: HttpRequest):
                     context = {
                         "form": form,
                         "file_convertion_error": True,
-                        "page_data": page_data
+                        **page_data
                     }
                     return render(request, 'main/main_page.html', context)
             
@@ -142,7 +142,7 @@ def main_page(request: HttpRequest):
                 "task_id": task.id,
                 "task_access_token": task_access_token.access_token,
                 "ad_model": rand_ad,
-                "page_data": page_data
+                **page_data
             }
             return render(request, 'main/main_page.html', context)
         
@@ -151,7 +151,7 @@ def main_page(request: HttpRequest):
             context = {
                 "form": form,
                 "submit_error": True,
-                "page_data": page_data
+                **page_data
             }
             return render(request, 'main/main_page.html', context)
     
