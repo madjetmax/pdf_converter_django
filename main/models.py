@@ -37,7 +37,7 @@ class PageData(models.Model):
     url = models.TextField(unique=True) # endpoint like /example/path/
 
     title = models.CharField(max_length=100, blank=False)
-    description = models.TextField(max_length=150, blank=False)
+    description = models.TextField(blank=False)
     # like a list of tags separated with \n
     additional_meta_tags = models.TextField(null=True, blank=True)
 
